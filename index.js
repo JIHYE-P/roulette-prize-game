@@ -43,12 +43,44 @@ startButton.addEventListener('click', () => {
   requestAnimationFrame(spin);
 });
 
-const prizesData = prizes.map((prize, i, array) => {
-  const data = {}
-  const deg = 360/array.length;
-  data.prize = prize;
-  data.start = deg * i;
-  data.end = deg * (i + 1);
-  return data;
+start = 0;
+end = 100;
+duration = 1000;
+fragment = (end - start) / ((60 / 1000) * duration);
+
+/**
+ * FPS - 초당프레임 https://namu.wiki/w/FPS
+ * requestAnimationFrame 은 1초당 60번 함수를 실행되는데, 거리가 0에서 100까지 1초 동안 움직인다고 했을 때 60을 나누고,
+ * 
+ */
+
+requestAnimationFrame(function draw() {
+  start += fragment;
+  if (start < end) {
+    console.log(start);
+    requestAnimationFrame(draw)
+  } else {
+    start = end;
+    console.log(start);
+  }
+}); 
+
+return;
+
+let en = 0;
+const e = () => {
+  en += 10;
+}
+
+start = 0;
+fragment = 0.1;
+requestAnimationFrame(function draw() {
+  if(en > 0){
+    start += fragment;
+    en -= 0.1;
+    console.log(start);
+  }
+  requestAnimationFrame(draw);
 });
 
+window.e = e;

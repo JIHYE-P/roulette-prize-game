@@ -1,3 +1,6 @@
+/**
+ * Roulette class 객체지향
+ */
 class ElementBundler {
   root;
   constructor(tagName, properties = {}){
